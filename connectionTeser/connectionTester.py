@@ -24,8 +24,8 @@ def read_data():
     while True:
         if radio.available():
             data = radio.read()
-            if (len(data)==14):
-                value = struct.unpack('=BLLBL', data)
+            if (len(data)==8):
+                value = struct.unpack('=BHHBH', data)
                                     # 0 - id
                                     # 1 - battery
                                     # 2 - seqential no
