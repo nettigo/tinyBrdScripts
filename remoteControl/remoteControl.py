@@ -59,9 +59,9 @@ def read_data():
                                     # 1 - potentiometer
                 sensor_id = value[0]
                 pot = value[1]
-                mapped = bytes([int(map_value(pot,0,1023,0,3))])
+                mapped = int(map_value(pot,0,1023,0,4)).to_bytes(2,byteorder='little')[0]
                 print_with_time ("ID:{}: AnalogRead:{}, map {}".format(sensor_id,pot,mapped))
-                set_led(radio,pot)
+                set_led(radio,mapped)
 
 while True:
     print_with_time("Start")
