@@ -22,7 +22,14 @@ def set_led(r,nr):
     b=bytes([102,nr])
     r.write(remote,b)
     r.flush()    
-    
+
+def map_value(x, min_x, max_x, min_res, max_res):
+    ret = x/(max_x-min_x)*(max_res-min_res) + min_res    
+    if ret > max_res:
+        ret = max_res
+    if ret < min_res:
+        ret = min_res
+    return ret
 
 def read_analog(r):
     b = bytes([99])
@@ -52,7 +59,8 @@ def read_data():
                                     # 1 - potentiometer
                 sensor_id = value[0]
                 pot = value[1]
-                print_with_time ("ID:{}: AnalogRead:{}".format(sensor_id,pot))
+                mapped = bytes([int(map_value(pot,0,1023,0,3))])
+                print_with_time ("ID:{}: AnalogRead:{}, map {}".format(sensor_id,pot,mapped))
                 set_led(radio,pot)
 
 while True:
