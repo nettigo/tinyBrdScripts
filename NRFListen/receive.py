@@ -4,14 +4,14 @@ import struct
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('address', metavar='N', type=int, nargs=3, help='3 bytes of NRF24L01 receiver adddress')
-parser.add_argument('--format',help="message format in ")
+parser.add_argument('--format',help="message definition as in python unpack function")
 from sensor import *
 
 
 args = parser.parse_args();
 
 if (args.format):
-     print(args.format)
+     print("Using {} as unpack format".format(args.format))
      s=struct.Struct(args.format)
 radio = setup_radio(args.address)
 while True:
