@@ -17,8 +17,8 @@ radio = ''
 def print_with_time(val):
     print("{0}{1}".format(strftime("%d %b %Y %H:%M:%S: ", localtime()),val))            
 
-def setup_radio():
-    radio = Radio(bytes([99,0,3]),100)
+def setup_radio(addr):
+    radio = Radio(bytes(addr),100)
     return radio
     
 
